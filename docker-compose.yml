@@ -1,0 +1,26 @@
+services:
+  mongo:
+    image: mongo
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=mongouser
+      - MONGO_INITDB_ROOT_PASSWORD=mongo
+    container_name: mongo_db
+    ports:
+      - "27017:27017"
+    volumes:
+    #save as volume
+      - mongo-db:/data/db
+
+  server:
+    build: ./server
+    container_name: express-server
+    ports:
+      - "4000:4000"
+    volumes:
+      - ./server:/app:ro
+      - /server/node_modules
+    depends_on:
+      - mongo
+
+volumes:
+  mongo-db:
