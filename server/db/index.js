@@ -1,11 +1,63 @@
 const mongoose = require("mongoose");
-const seedData = require("./seedDB");
-const { shinobiModel } = require("../models/shinobiModel");
+const { clan, jutsu, village } = require("./seedDB2");
+const shinobi = require("./seedDB");
+const {
+  clanModel,
+  jutsuModel,
+  villageModel,
+  shinobiModel,
+  ninjaModel,
+} = require("../models/shinobiModel");
 const MONGO_URI = process.env.MONGO_URI;
 
 const seedDB = async () => {
   await shinobiModel.deleteMany({});
-  await shinobiModel.insertMany(seedData);
+  await villageModel.deleteMany({});
+  await jutsuModel.deleteMany({});
+  await clanModel.deleteMany({});
+  await ninjaModel.deleteMany({});
+  console.log(`Reset Complete.`);
+
+  await clanModel.insertMany(clan);
+  console.log(`Clans inserted.`);
+  await jutsuModel.insertMany(jutsu);
+  console.log(`Jutsus inserted.`);
+  await villageModel.insertMany(village);
+  console.log(`Villages inserted.`);
+  await shinobiModel.insertMany(shinobi);
+  console.log(`Shinobis inserted.`);
+  await shinobiModel.aggregate([
+    {
+      $lookup: {
+        from: "clans",
+        localField: "clan.name",
+        foreignField: "name",
+        as: "Clan",
+      },
+      $lookup: {
+        from: "villages",
+        localField: "village.name",
+        foreignField: "name",
+        as: "Village",
+      },
+      $lookup: {
+        from: "jutsus",
+        localField: "jutsu.name",
+        foreignField: "name",
+        as: "Jutsu",
+      },
+    },
+    {
+      $merge: {
+        into: "shinobis",
+        on: "_id",
+        whenMatched: "replace",
+        whenNotMatched: "insert",
+      },
+    },
+  ]);
+  console.log(`Aggregation Complete.`);
+
   console.log(`Seeding Complete.`);
 };
 
@@ -21,7 +73,7 @@ const connectDB = async () => {
     );
 
     console.log(`Processing to Seeding..`);
-    seedDB().then(() => mongoose.connection.close());
+    seedDB();
   } catch (error) {
     console.log(`MongoDB connection failed with err ${error}`.bgRed.bold);
     console.log(`Retrying connection... on host ${MONGO_URI}`);

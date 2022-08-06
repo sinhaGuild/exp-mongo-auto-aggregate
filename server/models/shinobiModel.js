@@ -20,7 +20,6 @@ const villageSchema = new Schema({
 const jutsuSchema = new Schema({
   name: {
     type: String,
-    lowercase: true,
     required: [true, "Jutsu Name?"],
   },
   description: String,
@@ -30,22 +29,28 @@ const jutsuSchema = new Schema({
 const shinobiSchema = new Schema({
   shinobi_name: String,
   designation: String,
-  clan: {
-    type: clanSchema,
-    default: {},
-  },
+  clan: clanSchema,
   village: villageSchema,
   jutsu: [jutsuSchema],
+});
+
+const ninjaSchema = new Schema({
+  name: {
+    type: String,
+    unique: true,
+  },
 });
 
 const shinobiModel = mongoose.model("Shinobi", shinobiSchema);
 const clanModel = mongoose.model("Clan", clanSchema);
 const villageModel = mongoose.model("Village", villageSchema);
 const jutsuModel = mongoose.model("Jutsu", jutsuSchema);
+const ninjaModel = mongoose.model("Ninja", ninjaSchema);
 
 module.exports = {
   shinobiModel,
   clanModel,
   villageModel,
   jutsuModel,
+  ninjaModel,
 };
