@@ -13,7 +13,7 @@ const data = [
     jutsu: [
       {
         name: "kagebunshin no jutsu",
-        description: "Multliplies self based on chakra",
+        description: "Tajuu Kage bunshin no jutsu.",
         rank: 100,
       },
       {

@@ -4,27 +4,27 @@ const data = [
     designation: "Chunin",
     clan: {
       name: "Uzumaki",
-      population: 2,
+      // population: 2,
     },
     village: {
       name: "Konoha",
-      country: "Fire",
+      // country: "Fire",
     },
     jutsu: [
       {
         name: "kagebunshin no jutsu",
-        description: "Multliplies self based on chakra",
-        rank: 100,
+        // description: "Multliplies self based on chakra",
+        // rank: 100,
       },
       {
         name: "Rasengan",
-        description: "Concentrated ball of chakra.",
-        rank: 5,
+        // description: "Concentrated ball of chakra.",
+        // rank: 5,
       },
       {
         name: "Eroke no jutsu",
-        description: "Transform into a sexy partner.",
-        rank: 999,
+        // description: "Transform into a sexy partner.",
+        // rank: 999,
       },
     ],
   },
@@ -33,22 +33,22 @@ const data = [
     designation: "Chunin",
     clan: {
       name: "Uchiha",
-      population: 200,
+      // population: 200,
     },
     village: {
       name: "Konoha",
-      country: "Fire",
+      // country: "Fire",
     },
     jutsu: [
       {
         name: "Chidori",
-        description: "Electricity strike",
-        rank: 6,
+        // description: "Electricity strike",
+        // rank: 6,
       },
       {
         name: "Sharingan",
-        description: "Visual Doujutsu",
-        rank: 7,
+        // description: "Visual Doujutsu",
+        // rank: 7,
       },
       {
         name: "Sharingan Susanoo",

@@ -37,7 +37,6 @@ const shinobiSchema = new Schema({
 const ninjaSchema = new Schema({
   name: {
     type: String,
-    unique: true,
   },
 });
 

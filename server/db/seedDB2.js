@@ -21,7 +21,7 @@ const jutsu = [
   },
   {
     name: "kagebunshin no jutsu",
-    description: "Multliplies self based on chakra",
+    description: "tajuu kage bunshin no jutsu.",
     rank: 100,
   },
   {

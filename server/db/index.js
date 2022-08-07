@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const { clan, jutsu, village } = require("./seedDB2");
-const shinobi = require("./seedDB");
+const shinobi = require("./seedShinobi");
 const {
   clanModel,
   jutsuModel,
@@ -32,19 +32,23 @@ const seedDB = async () => {
         from: "clans",
         localField: "clan.name",
         foreignField: "name",
-        as: "Clan",
+        as: "clan",
       },
+    },
+    {
       $lookup: {
         from: "villages",
         localField: "village.name",
         foreignField: "name",
-        as: "Village",
+        as: "village",
       },
+    },
+    {
       $lookup: {
         from: "jutsus",
         localField: "jutsu.name",
         foreignField: "name",
-        as: "Jutsu",
+        as: "jutsu",
       },
     },
     {
