@@ -65,7 +65,7 @@ const aggregateShinobis = async () => {
       $merge: {
         into: "shinobis",
         on: "_id",
-        whenMatched: "replace",
+        whenMatched: "merge",
         whenNotMatched: "insert",
       },
     },
