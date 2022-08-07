@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
+const { Schema, model } = mongoose;
 
 const clanSchema = new Schema({
   name: {
@@ -34,22 +34,14 @@ const shinobiSchema = new Schema({
   jutsu: [jutsuSchema],
 });
 
-const ninjaSchema = new Schema({
-  name: {
-    type: String,
-  },
-});
-
-const shinobiModel = mongoose.model("Shinobi", shinobiSchema);
-const clanModel = mongoose.model("Clan", clanSchema);
-const villageModel = mongoose.model("Village", villageSchema);
-const jutsuModel = mongoose.model("Jutsu", jutsuSchema);
-const ninjaModel = mongoose.model("Ninja", ninjaSchema);
+const mShinobi = model("Shinobi", shinobiSchema);
+const mClan = model("Clan", clanSchema);
+const mVillage = model("Village", villageSchema);
+const mJutsu = model("Jutsu", jutsuSchema);
 
 module.exports = {
-  shinobiModel,
-  clanModel,
-  villageModel,
-  jutsuModel,
-  ninjaModel,
+  mShinobi,
+  mClan,
+  mVillage,
+  mJutsu,
 };
