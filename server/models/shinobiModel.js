@@ -44,5 +44,4 @@ module.exports = {
   mClan,
   mVillage,
   mJutsu,
-  shinobiSchema,
 };

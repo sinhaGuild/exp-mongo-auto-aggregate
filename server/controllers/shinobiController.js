@@ -1,16 +1,16 @@
-const { mShinobi } = require("../models/shinobiModel");
-const { aggregateShinobis } = require("../db/pipeline/aggShinobis");
+const { mShinobi, shinobiSchema } = require("../models/shinobiModel");
+const aggregateShinobis = require("../db/pipeline/aggShinobis");
 
 const createShinobi = async (req, res) => {
   const shinobi = await req.body;
 
   try {
     const results = await mShinobi.insertMany(shinobi);
+    await aggregateShinobis();
     res.status(200).json({
       msg: `Success`,
       data: results,
     });
-    await aggregateShinobis();
   } catch (error) {
     res.status(400).json({
       msg: `Create Shinobi failed with err ${error}`,
@@ -21,7 +21,6 @@ const createShinobi = async (req, res) => {
 const getAllShinobi = async (req, res) => {
   try {
     const allShinobi = await mShinobi.find({});
-
     res.status(200).json({
       msg: "Success",
       data: allShinobi,

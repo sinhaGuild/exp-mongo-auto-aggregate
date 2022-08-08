@@ -39,11 +39,10 @@ const aggregateShinobis = async () => {
     console.log(`Aggregation Complete.`);
   } catch (error) {
     console.log(`Aggregation failed with error ${error}`);
-  } finally {
-    return;
   }
+  // finally {
+  //   return;
+  // }
 };
 
-module.exports = {
-  aggregateShinobis,
-};
+module.exports = aggregateShinobis;
