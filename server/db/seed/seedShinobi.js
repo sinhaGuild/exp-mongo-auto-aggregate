@@ -2,17 +2,21 @@ const data = [
   {
     shinobi_name: "Naruto",
     designation: "Chunin",
-    clan: {
-      name: "Uzumaki",
-      // population: 2,
-    },
-    village: {
-      name: "Konoha",
-      // country: "Fire",
-    },
+    clan: [
+      {
+        name: "Uzumaki",
+        // population: 2,
+      },
+    ],
+    village: [
+      {
+        name: "Konoha",
+        // country: "Fire",
+      },
+    ],
     jutsu: [
       {
-        name: "kagebunshin no jutsu",
+        name: "Kagebunshin no jutsu",
         // description: "Multliplies self based on chakra",
         // rank: 100,
       },
@@ -31,14 +35,18 @@ const data = [
   {
     shinobi_name: "Sasuke",
     designation: "Chunin",
-    clan: {
-      name: "Uchiha",
-      // population: 200,
-    },
-    village: {
-      name: "Konoha",
-      // country: "Fire",
-    },
+    clan: [
+      {
+        name: "Uchiha",
+        // population: 200,
+      },
+    ],
+    village: [
+      {
+        name: "Konoha",
+        // country: "Fire",
+      },
+    ],
     jutsu: [
       {
         name: "Chidori",

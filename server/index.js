@@ -14,9 +14,11 @@ app.use(morgan("dev"));
 app.use(cors());
 
 /** Base Route */
-app.get("/", (req, res) => {
-  res.status(200).send(`<h1>I am the Server Page.</h1>`);
-});
+// app.get("/", (req, res) => {
+//   res.status(200).send(`<h1>I am the Server Page.</h1>`);
+// });
+
+app.use("/shinobi", require("./routes/shinobiRoutes"));
 
 /** Start Server */
 const start = async () => {

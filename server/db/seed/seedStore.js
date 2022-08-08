@@ -20,7 +20,7 @@ const jutsu = [
     rank: 2,
   },
   {
-    name: "kagebunshin no jutsu",
+    name: "Kagebunshin no jutsu",
     description: "tajuu kage bunshin no jutsu.",
     rank: 100,
   },

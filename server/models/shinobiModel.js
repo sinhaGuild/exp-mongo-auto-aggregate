@@ -29,8 +29,8 @@ const jutsuSchema = new Schema({
 const shinobiSchema = new Schema({
   shinobi_name: String,
   designation: String,
-  clan: clanSchema,
-  village: villageSchema,
+  clan: [clanSchema],
+  village: [villageSchema],
   jutsu: [jutsuSchema],
 });
 
@@ -44,4 +44,5 @@ module.exports = {
   mClan,
   mVillage,
   mJutsu,
+  shinobiSchema,
 };

@@ -30,48 +30,53 @@ const seedDB = async () => {
   console.log(`Shinobis inserted.`);
 
   //aggregate Shinobi Collection
-  aggregateShinobis();
+  await aggregateShinobis();
 
-  console.log(`Exiting Seed Function.`);
+  console.log(`Seeding Complete. Exiting..`);
 };
 
 const aggregateShinobis = async () => {
-  await mShinobi.aggregate([
-    {
-      $lookup: {
-        from: "clans",
-        localField: "clan.name",
-        foreignField: "name",
-        as: "clan",
+  try {
+    const aggCursor = await mShinobi.aggregate([
+      {
+        $lookup: {
+          from: "clans",
+          localField: "clan.name",
+          foreignField: "name",
+          as: "clan",
+        },
       },
-    },
-    {
-      $lookup: {
-        from: "villages",
-        localField: "village.name",
-        foreignField: "name",
-        as: "village",
+      {
+        $lookup: {
+          from: "villages",
+          localField: "village.name",
+          foreignField: "name",
+          as: "village",
+        },
       },
-    },
-    {
-      $lookup: {
-        from: "jutsus",
-        localField: "jutsu.name",
-        foreignField: "name",
-        as: "jutsu",
+      {
+        $lookup: {
+          from: "jutsus",
+          localField: "jutsu.name",
+          foreignField: "name",
+          as: "jutsu",
+        },
       },
-    },
-    {
-      $merge: {
-        into: "shinobis",
-        on: "_id",
-        whenMatched: "merge",
-        whenNotMatched: "insert",
+      {
+        $merge: {
+          into: "shinobis",
+          // on: "name",
+          whenMatched: "merge",
+          whenNotMatched: "insert",
+        },
       },
-    },
-  ]);
-  console.log(`Aggregation Complete.`);
-  console.log(`Seeding Complete.`);
+    ]);
+    console.log(`Aggregation Complete.`);
+  } catch (error) {
+    console.log(`Aggregation failed with error ${error}`);
+  } finally {
+    return;
+  }
 };
 
 module.exports = seedDB;
