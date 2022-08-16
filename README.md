@@ -1,78 +1,38 @@
-#### TS - GRAPHQL - APOLLO-SERVER - NEXUS - PRISMA
+#### EXPRESS - MONGO
 ---
 
-# GraphQL Server Example with `express-graphql`
-
-This example shows how to implement a **GraphQL server with TypeScript** with the following stack:
-
-- [**Express GraphQL**](https://github.com/graphql/express-graphql): Express middleware for GraphQL HTTP servers   
-- [**GraphQL Nexus**](https://nexusjs.org/docs/): GraphQL schema definition and resolver implementation 
-- [**Prisma Client**](https://www.prisma.io/docs/concepts/components/prisma-client): Databases access (ORM)                  
-- [**Prisma Migrate**](https://www.prisma.io/docs/concepts/components/prisma-migrate): Database migrations               
-- [**SQLite**](https://www.sqlite.org/index.html): Local, file-based SQL database
-
-## Contents
-
-- [Getting Started](#getting-started)
-- [Using the GraphQL API](#using-the-graphql-api)
-- [Evolving the app](#evolving-the-app)
-- [Switch to another database (e.g. PostgreSQL, MySQL, SQL Server)](#switch-to-another-database-eg-postgresql-mysql-sql-server)
-- [Next steps](#next-steps)
-
-## Getting started
-
-### 1. Download example and install dependencies
-
-Download this example:
-
+### Mongo pipelines with auto-aggregate
 ```
-curl -LJO 'https://github.com/sinhaGuild/pg-nexus-ts-gql/archive/refs/heads/main.zip'
+{
+   7   │         $lookup: {
+   8   │           from: "clans",
+   9   │           localField: "clan.name",
+  10   │           foreignField: "name",
+  11   │           as: "clan",
+  12   │         },
+  13   │       },
+  14   │       {
+  15   │         $lookup: {
+  16   │           from: "villages",
+  17   │           localField: "village.name",
+  18   │           foreignField: "name",
+  19   │           as: "village",
+  20   │         },
+  21   │       },
+  22   │       {
+  23   │         $lookup: {
+  24   │           from: "jutsus",
+  25   │           localField: "jutsu.name",
+  26   │           foreignField: "name",
+  27   │           as: "jutsu",
+  28   │         },
+  29   │       },
+  30   │       {
+  31   │         $merge: {
+  32   │           into: "shinobis",
+  33   │           // on: "_id",
+  34   │           whenMatched: "merge",
+  35   │           whenNotMatched: "insert",
+  36   │         },
+  37   │       },
 ```
-
-Install npm dependencies:
-
-```
-
-cd api
-yarn install
-yarn run dev
-```
-
-<details><summary><strong>Alternative:</strong> Clone the entire repo</summary>
-
-Clone this repository:
-
-```
-git clone git@github.com:sinhaGuild/pg-nexus-ts-gql.git --depth=1
-```
-
-Install npm dependencies:
-
-```
-cd api/
-yarn install
-```
-
-</details>
-
-### 2. Create and seed the database
-
-Run the following command to create your SQLite database file. This also creates the `User` and `Post` tables that are defined in [`prisma/schema.prisma`](./prisma/schema.prisma):
-
-```
-npx prisma migrate dev --name init
-```
-
-When `npx prisma migrate dev` is executed against a newly created database, seeding is also triggered. The seed file in [`prisma/seed.ts`](./prisma/seed.ts) will be executed and your database will be populated with the sample data.
-
-
-### 3. Start the GraphQL server
-
-Launch your GraphQL server with this command:
-
-```
-yarn run dev
-```
-
-Navigate to [http://localhost:4000](http://localhost:4000) in your browser to explore the API of your GraphQL server in a [GraphQL Playground](https://github.com/prisma/graphql-playground).
-# pg-nexus-ts-gql
