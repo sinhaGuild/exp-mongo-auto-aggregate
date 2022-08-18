@@ -10,11 +10,47 @@
 
 ```
 #clone the repo
-docker-compose up
-docker ps
+
+docker-compose up	//Sets up a local instance of MongoDB
+cd server
+npm install
+```
+
+Create .env file at `server/`
+
+```
+PORT=4000
+MONGO_URI=mongodb://mongouser:mongo@localhost:27017/mydb?authSource=admin
 ```
 
 _Note_: Installation includes a seeding script which will run automatically as part of docker compose.
+
+<details>
+<summary>Expand for a fully containerized install</summary>
+</br>
+Uncomment the following code from `docker-compose.yml`
+```
+server:
+build: ./server
+container_name: express-server
+ports:
+  - "4000:4000"
+volumes:
+  - ./server:/app:ro
+  - /server/node_modules
+depends_on:
+  - mongo
+  ```
+Change the `database-host` reference in .env file to the container-name for server
+```
+MONGO_URI=mongodb://mongouser:mongo@mongo:27017/mydb?authSource=admin
+```
+Run the container
+```
+docker-compose up --build -v
+```
+
+</details>
 
 ### Shutdown
 
